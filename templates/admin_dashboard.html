@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #54f77f, #2f312f);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #c8f0c8;
+            font-size: 26px;
+            animation: fadeInTop 0.7s ease-in-out;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            width: 250px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #e8fbe3;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: #43a047;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #2e7d32;
+        }
+
+        @keyframes fadeInTop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome Admin</h2>
+
+    <div class="card-container">
+        <div class="card" onclick="goTo('add_hod')">
+            <a href="{{ url_for('add_hod') }}">➕ Add HOD</a>
+        </div>
+        <div class="card" onclick="goTo('add_student')">
+            <a href="{{ url_for('add_student') }}">🧑‍🎓 Add Student</a>
+        </div>
+        <div class="card" onclick="goTo('upload_document')">
+            <a href="{{ url_for('upload_document') }}">📁 Upload Document</a>
+        </div>
+    </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+    <script>
+        // Animate cards on load
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".card");
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        function goTo(page) {
+            window.location.href = "/" + page;
+        }
+    </script>
+</body>
+</html>

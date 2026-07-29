@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Student Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #54f77f, #2f312f);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 40px;
+            width: 420px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInCard 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px #c8f0c8;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px;
+            width: 100%;
+            background-color: #43a047;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e7d32;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .success { color: #00ff00; }
+        .error { color: #ff4d4d; }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="uploadCard">
+        <h2>📄 Upload Student Document</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="student_id">Student ID</label>
+            <input type="text" id="student_id" name="student_id" required>
+
+            <label for="document_type">Document Type</label>
+            <select id="document_type" name="document_type" required>
+                <option value="">-- Select Document Type --</option>
+                <option value="Marksheet">Marksheet</option>
+                <option value="Aadhar">Aadhar</option>
+                <option value="Transfer Certificate">Transfer Certificate</option>
+                <option value="Bonafide">Bonafide</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label for="document">Select File</label>
+            <input type="file" id="document" name="document" required>
+
+            <button type="submit">Upload</button>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <p class="message {{ category }}">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    </div>
+
+    <script>
+        // Smooth card fade-in animation
+        document.addEventListener("DOMContentLoaded", function () {
+            const card = document.getElementById("uploadCard");
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>

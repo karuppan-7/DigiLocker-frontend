@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOD Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1b2e1f, #4caf50);
+            color: #ecfce8;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            max-width: 700px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #8bc34a;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #69f0ae;
+        }
+
+        th {
+            background-color: #2e7d32;
+        }
+
+        button {
+            padding: 7px 12px;
+            border: none;
+            border-radius: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .accept-btn {
+            background-color: #66bb6a;
+            color: white;
+        }
+
+        .reject-btn {
+            background-color: #ef5350;
+            color: white;
+        }
+
+        .accepted {
+            color: #c8e6c9;
+            font-weight: bold;
+        }
+
+        .rejected {
+            color: #ffcdd2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Welcome HOD - Department Dashboard</h2>
+
+    <!-- Student List Section -->
+    <div class="card">
+        <div class="section-title">Department Students</div>
+        <table id="studentTable">
+            <tr>
+                <th>Student Name</th>
+                <th>User ID</th>
+                <th>Status</th>
+            </tr>
+            <!-- Dynamically filled from backend -->
+        </table>
+    </div>
+
+    <!-- Document Request Section -->
+    <div class="card">
+        <div class="section-title">Student Document Requests</div>
+        <table id="requestTable">
+            <tr>
+                <th>Student</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+            <!-- Dynamically filled from backend -->
+        </table>
+    </div>
+
+    <!-- JavaScript to handle Accept/Reject -->
+    <script>
+        function handleDecision(rowId, decision) {
+            const row = document.getElementById(rowId);
+            row.innerHTML = `<td colspan="3" class="${decision === 'Accepted' ? 'accepted' : 'rejected'}">
+                Request ${decision}
+            </td>`;
+        }
+    </script>
+
+</body>
+</html>
